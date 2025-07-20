@@ -43,10 +43,10 @@ function Search({ insertData }) {
         try {
             let result = await GetWheatherData();
             insertData(result);
-            setError(false);   // ✅ Reset error state
-            setCity("");       // ✅ Clear input only after success
+            setError(false);   
+            setCity("");       
         } catch (err) {
-            setError(true);    // ❌ Show error message on failure
+            setError(true);    
         }
     }
 
@@ -63,6 +63,7 @@ function Search({ insertData }) {
                 />
                 <br /><br />
                 <Button 
+                    style={{marginBottom:"10px"}}
                     variant="contained" 
                     endIcon={<SendIcon />} 
                     type="submit"
