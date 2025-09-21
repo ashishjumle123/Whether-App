@@ -1,8 +1,9 @@
 import Search from './searchbox'
 import Infobox from './infobox'
 import { useState } from 'react';
+
 function WheatherApp(){
-    let [data,setData] = useState({
+    let [weatherData,setWeatherData] = useState({
         city :"Nagpur",
         feelsLike: 23.23,
         humidity: 94,
@@ -11,14 +12,16 @@ function WheatherApp(){
         tempMin: 22.47,        
         weather: "overcast clouds"
     })
+    
     function insertData(newData){
-         setData(newData);
+        setWeatherData(newData);
     }
+
     return(
        <>
        <h1 style={{color:"black"}}>Wheather App</h1>
         <Search insertData={insertData}/>
-       <Infobox info={data}/>
+       <Infobox info={weatherData}/>
        </>
     )
 }

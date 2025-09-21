@@ -2,6 +2,8 @@ import { useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import SendIcon from '@mui/icons-material/Send';
+import Stack from '@mui/material/Stack';
+import Alert from '@mui/material/Alert';
 
 function Search({ insertData }) {
     let [city, setCity] = useState("");
@@ -14,14 +16,15 @@ function Search({ insertData }) {
     let GetWheatherData = async () => {
         try {
             let API_URL = "https://api.openweathermap.org/data/2.5/weather";
-            let API_KEY = "4ea3089f21b190200aea801a34a0a560";
+            let API_KEY = "272f4894957c14c1a9adea8453b6b496";
             let response = await fetch(`${API_URL}?q=${city}&appid=${API_KEY}&units=metric`);
-            
+
             if (!response.ok) {
                 throw new Error("City not found");
             }
 
             let JsonResponse = await response.json();
+
             let result = {
                 city: city,
                 temp: JsonResponse.main.temp,
@@ -31,6 +34,7 @@ function Search({ insertData }) {
                 feelsLike: JsonResponse.main.feels_like,
                 weather: JsonResponse.weather[0].description,
             };
+
             console.log(result);
             return result;
         } catch (err) {
@@ -43,35 +47,47 @@ function Search({ insertData }) {
         try {
             let result = await GetWheatherData();
             insertData(result);
-            setError(false);   
-            setCity("");       
+            setError(false);
+            setCity("");
         } catch (err) {
-            setError(true);    
+            setError(true);
         }
     }
 
     return (
         <div>
+            {/* Error Alert at the Top */}
+            {error && (
+                <Stack sx={{ width: '100%', mb: 2 }} spacing={2}>
+                    <Alert 
+                        severity="error" 
+                        onClose={() => setError(false)}
+                    >
+                        City not found, please enter the correct city name!
+                    </Alert>
+                </Stack>
+            )}
+
+            {/* Search Form */}
             <form onSubmit={handlerSubmit}>
-                <TextField 
-                    id="outlined-basic" 
-                    label="City Name" 
-                    variant="outlined" 
-                    value={city} 
-                    onChange={handlerChange} 
-                    required 
+                <TextField
+                    id="outlined-basic"
+                    label="City Name"
+                    variant="outlined"
+                    value={city}
+                    onChange={handlerChange}
+                    required
                 />
                 <br /><br />
-                <Button 
-                    style={{marginBottom:"10px"}}
-                    variant="contained" 
-                    endIcon={<SendIcon />} 
+                <Button
+                    style={{ marginBottom: "10px" }}
+                    variant="contained"
+                    endIcon={<SendIcon />}
                     type="submit"
                 >
                     Search
                 </Button>
             </form>
-            {error && <p style={{ color: "red" }}>No such place exists</p>}
         </div>
     );
 }

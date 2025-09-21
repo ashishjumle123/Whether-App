@@ -2,6 +2,7 @@ import React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
+// icons :+
 import ThunderstormIcon from '@mui/icons-material/Thunderstorm';
 import SunnyIcon from '@mui/icons-material/Sunny';
 import AcUnitIcon from '@mui/icons-material/AcUnit';
@@ -9,7 +10,7 @@ import AcUnitIcon from '@mui/icons-material/AcUnit';
 import Typography from '@mui/material/Typography';
 function Infobox({info}){
       const HOT_URL = "https://wallpapers.com/images/featured/arizona-desert-pictures-5yz6gtc3394vaan6.jpg"
-      const RAINY_URL = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRrbN3Ci3cw6on7bNHDKgx-u3xa1GmrcjGPQ&s"
+      const RAINY_URL = "https://media.istockphoto.com/id/2186584836/photo/seattle-rain.webp?a=1&b=1&s=612x612&w=0&k=20&c=C3-_KVdOUNpyGD1p3FUOEAAg-bRNnZ59Bnf3Ta0Xbxo="
       const COLD_URL = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt1qxoWJMtlX5rM674JuQc4sd8-hUasTEo7w&s"
     return(
        <>
@@ -19,9 +20,9 @@ function Infobox({info}){
         sx={{ height: 140 }}
         image= {
             info.humidity>80
-            ?RAINY_URL
+            ? RAINY_URL
             :info.temp>15
-            ?HOT_URL
+            ? HOT_URL
             :COLD_URL}
         title="green iguana"
       />
